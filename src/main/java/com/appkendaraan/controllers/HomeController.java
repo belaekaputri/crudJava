@@ -60,8 +60,7 @@ public class HomeController {
 
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") String id , Model model) {
-        model.addAttribute("kendaraan",kendaraanService.findById(id));
+    public String delete(@PathVariable("id") String id) {
        kendaraanService.deleteById(id);
        return "redirect:/";
     }
@@ -99,7 +98,8 @@ public class HomeController {
     @PostMapping("/search")
     public String search(SearchFormData searchFormData, Model model) {
         model.addAttribute("searchForm", searchFormData);
-        model.addAttribute("kendaraan", kendaraanService.findByNoregisOrNama(searchFormData.getKeyword1(), searchFormData.getKeyword2()));
+        model.addAttribute("kendaraan", kendaraanService.findByNoregisAndNama(searchFormData.getKeyword1(), searchFormData.getKeyword2()));
+    
         return "index";
     }
     
