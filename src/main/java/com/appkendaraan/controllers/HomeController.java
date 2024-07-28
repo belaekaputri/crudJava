@@ -98,7 +98,7 @@ public class HomeController {
     @PostMapping("/search")
     public String search(SearchFormData searchFormData, Model model) {
         model.addAttribute("searchForm", searchFormData);
-        model.addAttribute("kendaraan", kendaraanService.findByNoregisAndNama(searchFormData.getKeyword1(), searchFormData.getKeyword2()));
+        model.addAttribute("kendaraan", kendaraanService.findByNoregisOrNama(searchFormData.getKeyword1(), searchFormData.getKeyword2()));
     
         return "index";
     }

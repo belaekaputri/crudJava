@@ -36,8 +36,8 @@ public class KendaraanService {
       repo.save(kendaraan);
   }
 
-  public List<Kendaraan> findByNoregisAndNama(String keyword1,String keyword2){
-    return repo.findByNoregisAndNama(keyword1,keyword2);
+  public List<Kendaraan> findByNoregisOrNama(String keyword1,String keyword2){
+    return repo.findByNoregisOrNama(keyword1,keyword2);
   }
     
 }
