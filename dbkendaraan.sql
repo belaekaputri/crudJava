@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2024 at 06:41 AM
+-- Generation Time: Aug 09, 2024 at 03:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -28,13 +28,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbl_kendaraan` (
-  `noregis` varchar(255) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `noregis` varchar(10) NOT NULL,
+  `tahun` int(11) NOT NULL,
   `alamat` varchar(255) DEFAULT NULL,
   `bahan` varchar(255) DEFAULT NULL,
   `kapasitas` int(11) NOT NULL,
   `merk` varchar(255) DEFAULT NULL,
   `nama` varchar(255) DEFAULT NULL,
-  `tahun` int(11) DEFAULT NULL,
   `warna` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -42,12 +43,12 @@ CREATE TABLE `tbl_kendaraan` (
 -- Dumping data for table `tbl_kendaraan`
 --
 
-INSERT INTO `tbl_kendaraan` (`noregis`, `alamat`, `bahan`, `kapasitas`, `merk`, `nama`, `tahun`, `warna`) VALUES
-('B-1678-BDG', 'Polandia', 'Bensin', 150, 'Honda Vario', 'Cristiano Ronaldo', 2018, 'Hitam'),
-('B-3110-BGT', 'Bengkulu', 'Bensin', 125, 'Honda Scoopy', 'Natasha Romanov', 2020, 'Hitam'),
-('B-3461-UPQ', 'Jakarta', 'Bensin', 125, 'Honda Beat', 'Bambang Pamungkas', 2019, 'Biru'),
-('B-7763-TXY', 'PARIS', 'Bensin', 150, 'Honda PCX', 'Lionel Messi', 2018, 'Merah'),
-('B-7829-TYP', 'Bekasi', 'Bensin', 125, 'Honda Beat', 'Entis Siti Jubaidah', 2019, 'Merah');
+INSERT INTO `tbl_kendaraan` (`id`, `noregis`, `tahun`, `alamat`, `bahan`, `kapasitas`, `merk`, `nama`, `warna`) VALUES
+(1, 'B-1678-BDG', 2018, 'Polandia', 'Bensin', 150, 'Honda Vario', 'Cristiano Ronaldo', 'Hitam'),
+(2, 'B-3110-BGT', 2020, 'Bengkulu', 'Bensin', 125, 'Honda Scoopy', 'Natasha Romanov', 'Merah'),
+(3, 'B-3461-UPQ', 2019, 'Jakarta', 'Bensin', 125, 'Honda Beat', 'Bambang Pamungkas', 'Biru'),
+(4, 'B-7763-TXY', 2018, 'PARIS', 'Bensin', 150, 'Honda PCX', 'Lionel Messi', 'Hitam'),
+(5, 'B-7829-TYP', 2019, 'Bekasi', 'Bensin', 125, 'Honda Beat', 'Entis Siti Jubaidah', 'Merah');
 
 --
 -- Indexes for dumped tables
@@ -57,7 +58,18 @@ INSERT INTO `tbl_kendaraan` (`noregis`, `alamat`, `bahan`, `kapasitas`, `merk`, 
 -- Indexes for table `tbl_kendaraan`
 --
 ALTER TABLE `tbl_kendaraan`
-  ADD PRIMARY KEY (`noregis`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UK_vd5cle1dneqwdcvyjdautjst` (`noregis`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbl_kendaraan`
+--
+ALTER TABLE `tbl_kendaraan`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

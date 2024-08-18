@@ -53,6 +53,10 @@ public class HomeController {
             return "redirect:/";
 		} catch (DataAccessException e) {
 		 	errors.reject("error.object", e.getMessage());
+             if (e.getMessage().contains("UK_vd5cle1dneqwdcvyjdautjst")) {
+                model.addAttribute("errorMessage", "No Registrasi Tidak Boleh Duplikat!");
+                  return "/edit";// 
+            }
 			LOGGER.error(e.getMessage());
 			return "/add";
 		}
@@ -60,18 +64,18 @@ public class HomeController {
 
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") String id) {
+    public String delete(@PathVariable("id") Long id) {
        kendaraanService.deleteById(id);
        return "redirect:/";
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") String id, Model model) {
+    public String edit(@PathVariable("id") Long id, Model model) {
        model.addAttribute("kendaraan",kendaraanService.findById(id));
        return "edit"; 
     }
     @GetMapping("/detail/{id}")
-    public String detail(@PathVariable("id") String id, Model model) {
+    public String detail(@PathVariable("id") Long id, Model model) {
        model.addAttribute("kendaraan",kendaraanService.findById(id));
        return "detail"; 
     }
@@ -88,6 +92,10 @@ public class HomeController {
             return "redirect:/";
         } catch (DataAccessException e) {
             errors.reject("error.object", e.getMessage());
+            if (e.getMessage().contains("UK_vd5cle1dneqwdcvyjdautjst")) {
+                model.addAttribute("errorMessage", "No Registrasi Tidak Boleh Duplikat!");
+                  return "/edit";// 
+            }
             LOGGER.error(e.getMessage());
             return "/edit";
         }
@@ -99,7 +107,6 @@ public class HomeController {
     public String search(SearchFormData searchFormData, Model model) {
         model.addAttribute("searchForm", searchFormData);
         model.addAttribute("kendaraan", kendaraanService.findByNoregisOrNama(searchFormData.getKeyword1(), searchFormData.getKeyword2()));
-    
         return "index";
     }
     

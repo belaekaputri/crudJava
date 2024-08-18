@@ -24,11 +24,11 @@ public class KendaraanService {
     public void addKendaraan(Kendaraan kendaraan){
         repo.save(kendaraan);
       }
-      public void deleteById(String id){
+      public void deleteById(Long id){
         repo.deleteById(id);
        } 
 
-       public Optional<Kendaraan> findById(String id){
+       public Optional<Kendaraan> findById(Long id){
         return repo.findById(id);
     }
 
@@ -37,7 +37,9 @@ public class KendaraanService {
   }
 
   public List<Kendaraan> findByNoregisOrNama(String keyword1,String keyword2){
-    return repo.findByNoregisOrNama(keyword1,keyword2);
+    if ((keyword1.isEmpty()) && (keyword2.isEmpty())) {
+      return (List<Kendaraan>) repo.findAll();
   }
-    
+  return repo.findByNoregisOrNama(keyword1, keyword2);
+  }  
 }

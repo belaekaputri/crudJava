@@ -7,18 +7,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+    input.error {
+    border: 1px solid red;
+    color: red;
+}
+</style>
 </head>
 <body>
    <div class="container">
     <div class="mb-3 mt-2">
         <h3><i class="bi bi-folder mr-2 " style="color:#409ad5;" ></i>Tambah Data Kendaraan</h3>
     </div>
-    <form method="post" th:object="${kendaraan}" th:action="@{/save}">
-        <div th:if="${#fields.hasErrors('all')}">
+    <form method="post" th:object="${kendaraan}" th:action="@{/save}" id="formEntry">
+        <div th:if="${errorMessage}">
           <div class="form-group">
               <div class="alert alert-danger alert-dismissible fade show">
-                  <label th:errors="*{all}" style="font-size:10px;">xxx</label>
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  <label th:text="${errorMessage}" style="font-size:14px;">xxx</label>
               </div>
           </div>
       </div>
@@ -45,7 +50,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="mb-1">Tahun Pembuatan</label>
-                    <input type="number" class="form-control" th:field="*{tahun}"  autocomplete="off">
+                    <input type="number" class="form-control" th:field="*{tahun}"  autocomplete="off" name="tahun">
                 </div>
                 <div class="form-group">
                   <label class="mb-1">Kapasitas Slinder</label>
@@ -68,23 +73,33 @@
             </div>
            
             <button class="ml-3" style="background-color: #4472c4; border-radius: 5px; width:150px; margin-right:6px; color:white; border:2px solid #2f528f;" type="submit" >Submit</button>
-         
             <a  style="background-color: #a6a6a6;text-align: center; border-radius: 5px; width:150px; padding:3px; color:white; border:2px solid #7f7f7f;"  th:href="@{'/'}">Kembali</a>
-         
         </div>
-         
-          
-          
-       
-        
-           
       </form>
    </div>
 </body>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 crossorigin="anonymous"></script>
 
-</script>
+<script>
+    $(document).ready(function() {
+    $("#formEntry").validate({
+      rules: {
+      tahun: {
+      minlength: 4,
+      max:2024
+        },
+    },
+    messages : {
+    tahun: {
+    minlength: "Panjang Karakter harus 4",
+    max: "Maksimal Tahun 2024"
+    }
+    }
+});
+});
+  </script>
 </html>

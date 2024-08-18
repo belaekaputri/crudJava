@@ -7,7 +7,7 @@ import java.util.List;
 
 
 
-public interface KendaraanRepo extends CrudRepository<Kendaraan,String> {
+public interface KendaraanRepo extends CrudRepository<Kendaraan,Long> {
 List<Kendaraan> findByNoregisOrNama(String keyword1,String keyword2);
     
 }
